@@ -1,0 +1,29 @@
+.container {
+  background-color: #93c5fd;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: Roboto;
+}
+.card {
+  width: 400px;
+  height: 200px;
+  border-radius: 20px;
+  background-color: #f8fafc;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+.heading {
+  font-size: 26px;
+}
+
+.dropdown-list {
+  background-color: #f8fafc;
+  font-size: 12px;
+  font-weight: bold;
+}
+.result {
+}
