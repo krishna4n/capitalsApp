@@ -1,4 +1,5 @@
 import {Component} from 'react'
+
 import './index.css'
 
 const countryAndCapitalsList = [
@@ -29,42 +30,56 @@ const countryAndCapitalsList = [
   },
 ]
 
-// Write your code here
-class Capital extends Component {
-  state = {activeId: countryAndCapitalsList[0].id}
+class Capitals extends Component {
+  state = {
+    activeCapitalId: countryAndCapitalsList[0].id,
+  }
 
-  onCapitalSelect = event => {
-    this.setState({activeId: event.target.value})
+  onChangeCapital = event => {
+    this.setState({activeCapitalId: event.target.value})
+  }
+
+  getCountry = () => {
+    const {activeCapitalId} = this.state
+
+    const activeCountryAndCapital = countryAndCapitalsList.find(
+      eachCapital => eachCapital.id === activeCapitalId,
+    )
+
+    return activeCountryAndCapital.country
   }
 
   render() {
-    const {activeId} = this.state
-    const selectedCapital = countryAndCapitalsList.filter(
-      eachCapital => eachCapital.id === activeId.toUpperCase(),
-    )
-
-    const country = selectedCapital.length > 0 ? selectedCapital[0].country : ''
+    const {activeCapitalId} = this.state
+    const country = this.getCountry(activeCapitalId)
 
     return (
-      <div className="container">
-        <div className="card">
+      <div className="app-container">
+        <div className="capitals-container">
           <h1 className="heading">Countries And Capitals</h1>
-          <p className="description">
-            <select className="dropdown-list" onChange={this.onCapitalSelect}>
-              {countryAndCapitalsList.map(eachCountry => (
-                <option key={eachCountry.id} value={eachCountry.id}>
-                  {eachCountry.capitalDisplayText}
+          <div className="question-container">
+            <select
+              className="capital-select"
+              onChange={this.onChangeCapital}
+              value={activeCapitalId}
+            >
+              {countryAndCapitalsList.map(eachCapital => (
+                <option
+                  key={eachCapital.id}
+                  value={eachCapital.id}
+                  className="option"
+                >
+                  {eachCapital.capitalDisplayText}
                 </option>
               ))}
             </select>
-            is capital of which country?
-          </p>
-
-          <p className="result">{country}</p>
+            <p className="question">is capital of which country?</p>
+          </div>
+          <p className="country">{country}</p>
         </div>
       </div>
     )
   }
 }
 
-export default Capital
+export default Capitals
